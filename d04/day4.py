@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # License: GPL3
-# Day N
+# Day 4
 
 import sys
 import re
