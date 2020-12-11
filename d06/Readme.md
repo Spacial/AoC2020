@@ -48,9 +48,10 @@ As you finish the last group's customs declaration, you notice that you misread 
 You don't need to identify the questions to which anyone answered "yes"; you need to identify the questions to which everyone answered "yes"!
 
 Using the same example as above:
-```
 
+```
 abc
+
 a
 b
 c
