@@ -6,7 +6,7 @@ import sys
 
 
 def part1():
-    return 
+    return
 
 
 def part2():
@@ -16,4 +16,3 @@ def part2():
 entries = []
 for line in sys.stdin:
     entries.append(line.strip())
-
