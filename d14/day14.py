@@ -68,6 +68,13 @@ def floatingBit(mask, value, start):
     return thisflips
 
 
+def forkX(s):
+    if not 'X' in s:
+        return [int(s, 2)]
+    i = s.find('X')
+    return forkX(s[:i]+'0'+s[i+1:]) + forkX(s[:i]+'1'+s[i+1:])
+
+
 def part2(data):
     allmem = {}
     for k, v in data.items():
