@@ -93,5 +93,3 @@ This results in an address with three floating bits, causing writes to eight mem
 The entire 36-bit address space still begins initialized to the value 0 at every address, and you still need the sum of all values left in memory at the end of the program. In this example, the sum is 208.
 
 Execute the initialization program using an emulator for a version 2 decoder chip. What is the sum of all values left in memory after it completes?
-
-tested: 12591614485469, 13380680531375 <

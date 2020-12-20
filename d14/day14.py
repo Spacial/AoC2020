@@ -53,26 +53,14 @@ def part1(data):
     return s
 
 
-def floatingBit(mask, value, start):
-    if len(mask) == start:
-        return []
-    thisflips = []
-    for m in range(start, mask):
-        if mask[m] == 'X':
-            flipz = value.copy()
-            flipo = value.copy()
-            flipz[m] = 0
-            flipo[m] = 1
-            thisflips.append(floatingBit(mask, flipz, m))
-            thisflips.append(floatingBit(mask, flipo, m))
-    return thisflips
-
-
-def forkX(s):
-    if not 'X' in s:
-        return [int(s, 2)]
-    i = s.find('X')
-    return forkX(s[:i]+'0'+s[i+1:]) + forkX(s[:i]+'1'+s[i+1:])
+def floatingBit(value):
+    # print("received:", value)
+    if not 'X' in value:
+        return [int(value, 2)]
+    else:
+        i = value.find('X')
+    return floatingBit(value[:i] + '0' + value[i+1:]) + \
+           floatingBit(value[:i] + '1' + value[i+1:])
 
 
 def part2(data):
@@ -80,16 +68,21 @@ def part2(data):
     for k, v in data.items():
         for mask, mem in v.items():
             for addr, value in mem:
-                sbvalue = [s for s in '{0:0b}'.format(value).zfill(len(mask))]
+                sbvalue = [s for s in '{0:0b}'.format(addr).zfill(len(mask))]
                 listmask = [m for m in mask]
-                newvalue = []
+                newvalue = sbvalue.copy()
                 for b in range(len(sbvalue)):
-                    if listmask[b] == 'X':
-                        newvalue.append(sbvalue[b])
+                    if listmask[b] == '0':
+                        newvalue[b] = sbvalue[b]
                     else:
-                        newvalue.append(mask[b])
-                binint = int(''.join(newvalue), 2)
-                allmem[addr] = binint
+                        newvalue[b] = listmask[b]
+                basevalue = ''.join(newvalue)
+                if basevalue.find('X') >= 0:
+                    allvalues = floatingBit(basevalue)
+                else:
+                    allvalues = [basevalue]
+                for a in allvalues:
+                    allmem[a] = value
     s = 0
     for a, v in allmem.items():
         s += v
